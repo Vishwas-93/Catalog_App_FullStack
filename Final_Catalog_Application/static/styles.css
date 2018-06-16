@@ -1,0 +1,156 @@
+html, body, main{
+    height: 100%;
+    width: 100%;
+}
+
+.card-deck{
+
+    display: flex;
+    overflow: auto;
+}
+
+.card-mp{
+    margin
+}
+
+body {
+    display: block;
+
+   background-color: #cccccc;
+}
+
+.header{
+padding-top: 80px;
+}
+
+.img-height{
+    height: auto !important;
+}
+
+
+.card-body{
+    display: block !important;
+}
+
+
+.container{
+    width: 100%;
+
+}
+
+.card-flex{
+    display: flex;
+    overflow: auto;
+    height: 100%;
+    margin: 0 auto !important;
+}
+
+
+
+.margin_item_box{
+      margin-bottom: 20px;
+      padding-top: 20px;
+}
+
+
+.card-margin{
+    margin: 40px;
+}
+
+.center_div{
+    margin: 0 auto;
+    width: 50%;
+    height: 50%;
+}
+
+.card-margin-man{
+    width: 100% !important;
+    margin-top: 30px;
+}
+
+.row{
+    margin: auto; !important
+}
+
+
+.container-list-cat{
+    width: 20%;
+}
+
+
+.catalog_portion{
+    align:center;
+
+}
+
+.card-item{
+    width: 18rem !important;
+}
+
+
+/* For width in below 573 px */
+@media screen and (max-width: 573px) {
+    .align_items{
+    align-items: center;
+    }
+
+
+
+    .card-item{
+        width: 100% !important;
+    }
+
+    .card-margin{
+        margin: 10px;
+    }
+
+
+    .margin_item_box{
+       margin-left: auto;
+       margin-right:auto;
+       margin-bottom: 30px;
+       margin-top: auto;
+    }
+}
+
+
+/* For width in between 575 px and 950 px */
+@media screen and (min-width: 575px) and (max-width: 950px){
+
+    .container{
+        margin-left: 0px !important;
+        margin-right:0px !important;
+        max-width: 100%;
+
+    }
+
+    .card-width-custom{
+        width: 33% !important;
+    }
+
+
+     .margin_item_box{
+        margin: auto;
+
+    }
+
+    .card-deck{
+        display: flex;
+        overflow: auto;
+        flex-flow: row wrap;
+    }
+
+
+    .card-margin{
+        margin: 20px;
+    }
+
+}
+
+
+
+
+
+
+
+

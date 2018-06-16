@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+      <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel=stylesheet href="{{url_for('static', filename='styles.css')}}">
+    <title>Catalog</title>
+  </head>
+  <body>
+    <header>
+
+        <!--Navbar-->
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <a class="navbar-brand" href="{{url_for('getAllCategories')}}">Catalog App</a>
+
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li class="nav-item active">
+                <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="#">About</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="#recent_items">Recently Added</a>
+              </li>
+                <li class="nav-item active">
+                <a class="nav-link" href="{{url_for('getJSONData')}}">Access Our API</a>
+              </li>
+            </ul>
+              {% if user_logged_in == True%}
+                <a class="btn btn-outline-success my-2 my-sm-0" href="{{url_for('disgconnect')}}">Logout</a>
+              {%else%}
+                <a class="btn btn-outline-success my-2 my-sm-0" href="{{url_for('showLogin')}}">Login</a>
+              {%endif%}
+          </div>
+        </nav>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">About Catalog App</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                This is the one application where you get a list of all categories of sports. You can add and delete items only once you register.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+    </header>
+
+    <main>
+
+
+        <h3>Categories</h3>
+
+        <div class="container">
+
+            <div class="row mx-auto justify-content-center">
+        {% for category in categories %}
+
+        <div class="card card-margin card-item">
+          <a href="{{url_for('getItems', category=category.cat_name)}}">
+           {% if category.cat_name == 'Soccer' %}
+                <img class="card-img-top" src="./static/soccer.png" alt="Card image cap">
+            {% elif category.cat_name == 'Basketball' %}
+                <img class="card-img-top" src="./static/basketball.png" alt="Card image cap">
+            {% elif category.cat_name == 'Frisbee' %}
+                <img class="card-img-top" src="./static/frisbee.jpg" alt="Card image cap">
+            {% elif category.cat_name == 'Snoboarding' %}
+                <img class="card-img-top" src="./static/snowboard.jpeg" alt="Card image cap">
+            {% elif category.cat_name == 'Baseball' %}
+                <img class="card-img-top" src="./static/baseball.jpg" alt="Card image cap">
+            {% else %}
+                <img class="card-img-top" src="./static/background.jpg" alt="Card image cap">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ category.cat_name }}</h5>
+            </div>
+          </a>
+        </div>
+
+        {% endfor %}
+            <!--</div>-->
+                </div>
+        </div>
+
+
+
+
+        <!--# Recent Items Tab-->
+        <div id="recent_items">
+            <h3>Recent Items</h3>
+                <div class="container">
+                <div class="col">
+                    {% if user_logged_in == True%}
+                    <h5><a href="{{url_for('addItem')}}"> + Add New Items</a> </h5>
+                    {%endif%}
+                        {% for item in items %}
+                        <div class="row">
+                            <h5 class="card-title"><a href="{{url_for('getDescription', category=item.item_cat_name, item=item.item_name)}}">{{ item.item_name }} <i>({{item.item_cat_name}})</i></a></h5>
+                        </div>
+                        {% endfor %}
+                </div>
+                </div>
+        </div>
+
+
+    </main>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  </body>
+</html>
